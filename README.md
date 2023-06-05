@@ -28,6 +28,6 @@ python kantall.py
 
 2. Follow the prompts to enter the filter string and select the files to download.
 
-## License
+## License (MUST HAVE wget INSTALLED!)
 
 This project is licensed under the [MIT License](LICENSE).
