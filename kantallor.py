@@ -9,7 +9,7 @@ from colorama import Fore, Style
 base_url = 'https://ipsniper.info/archive/latest/domainlists/public/'
 
 # Strings to filter the file names
-filter_strings = ['australia', 'ozzie', 'aussie', '.au', 'gov.au', 'com.au', 'net.au', 'edu.au']
+filter_strings = ['.gz']
 
 try:
     # Send a GET request to the webpage
