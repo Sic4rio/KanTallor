@@ -1,15 +1,48 @@
+import urllib3
+from requests.exceptions import RequestsDependencyWarning
 import requests
 import subprocess
 from bs4 import BeautifulSoup
 from tabulate import tabulate
 from urllib.parse import urljoin
 from colorama import Fore, Style
+import warnings
+
+# Disable RequestsDependencyWarning
+warnings.filterwarnings("ignore", category=RequestsDependencyWarning)
 
 # URL of the webpage
 base_url = 'https://ipsniper.info/archive/latest/domainlists/public/'
 
-# Strings to filter the file names
-filter_strings = ['.gz']
+try:
+    # Send a GET request to the webpage
+    response = requests.get(base_url)
+
+    # Check if the request was successful
+    if response.status_code != 200:
+        print(f"Error accessing the webpage. Status code: {response.status_code}")
+        exit()
+
+    # Parse the HTML content
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    # Find all the links on the webpage
+    links = soup.find_all('a')
+
+    # Prompt the user for the filter string
+    filter_string = input(f"{Fore.YELLOW}Enter the filter string:{Style.RESET_ALL} ")
+
+    # Check if the filter string is not empty
+    if filter_string.strip():
+        filter_strings = [filter_string]
+    else:
+        print(f"{Fore.RED}Filter string cannot be empty.{Style.RESET_ALL}")
+        exit()
+
+    # Rest of the script...
+
+except KeyboardInterrupt:
+    print(f"\n{Fore.RED}Program interrupted by user.{Style.RESET_ALL}")
 
 try:
     # Send a GET request to the webpage
@@ -87,5 +120,11 @@ try:
                 print("\nDownload interrupted by user.")
                 break
 
+
 except KeyboardInterrupt:
-    print("\nProgram interrupted by user.")
+    print(f"\n{Fore.RED}Program interrupted by user.{Style.RESET_ALL}")
+
+# Suppress the RequestsDependencyWarning
+warnings.filterwarnings("ignore", category=requests.exceptions.RequestsDependencyWarning)
+
+
