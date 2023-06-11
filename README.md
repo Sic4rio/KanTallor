@@ -1,6 +1,6 @@
 # KanTallor IP Sniper
 
-This script allows you to download files from a webpage based on specified filters. It uses the KanTallor IP Sniper by SICARIO.
+This script allows you to download files from a webpage based on specified filters. It uses the KanTallor IP Sniper.
 
 ## Installation
 
